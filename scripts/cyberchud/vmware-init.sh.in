@@ -1,0 +1,14 @@
+#!/bin/sh
+
+DIR_NAME=CyberChud
+LIB_NAME=cyberchud
+
+set -x
+mkdir -p @CMAKE_CURRENT_SOURCE_DIR@/vmware
+sudo vmware-mount -o uid=1000,gid=1000 ~/vmware/templeos/templeos.vmdk @CMAKE_CURRENT_SOURCE_DIR@/vmware
+mkdir -p @CMAKE_CURRENT_SOURCE_DIR@/vmware/Home/$DIR_NAME
+cp @CMAKE_CURRENT_SOURCE_DIR@/holyc/${DIR_NAME}Load.HC @CMAKE_CURRENT_SOURCE_DIR@/vmware/Home/$DIR_NAME/Load.HC
+cp @CMAKE_CURRENT_SOURCE_DIR@/holyc/zRun.HC @CMAKE_CURRENT_SOURCE_DIR@/vmware/Home/$DIR_NAME/
+cp -r @CMAKE_CURRENT_SOURCE_DIR@/holyc/Lib @CMAKE_CURRENT_SOURCE_DIR@/vmware/Home/$DIR_NAME/
+cp @CMAKE_CURRENT_BINARY_DIR@/lib$LIB_NAME.so @CMAKE_CURRENT_BINARY_DIR@/data.wad @CMAKE_CURRENT_SOURCE_DIR@/vmware/Home/$DIR_NAME/
+sudo vmware-mount -x
